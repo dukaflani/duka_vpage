@@ -306,13 +306,13 @@ const navMenuItems = useMemo(() => [
   onClick: currentLoggedInUser ? handleNavigateToProfile : handleLoginRegister,
   urlLink: currentLoggedInUser ? `https://dukaflani.com/${currentLoggedInUser?.username}` : "https://dukaflani.com/account/login"
 },
-{
-  primaryText: "Appearance",
-  secondaryText: is_darkMode === "dark" ? "Light Mode" : "Dark Mode",
-  icon: is_darkMode === "dark" ? <Brightness5Sharp/> : <Brightness4Sharp/>,
-  onClick: is_darkMode === "dark" ? handleSetLightMode : handleSetDarkMode,
-  urlLink: "/"
-},
+// {
+//   primaryText: "Appearance",
+//   secondaryText: is_darkMode === "dark" ? "Light Mode" : "Dark Mode",
+//   icon: is_darkMode === "dark" ? <Brightness5Sharp/> : <Brightness4Sharp/>,
+//   onClick: is_darkMode === "dark" ? handleSetLightMode : handleSetDarkMode,
+//   urlLink: "/"
+// },
 ],[currentLoggedInUser, is_darkMode])
 
 const navMenuItems2 = useMemo(() => [
