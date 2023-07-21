@@ -27,6 +27,7 @@ export function middleware(req) {
   let userCity = req.geo.city
   let userRegion = req.geo.region
   let userIP = req.ip
+  let hostURL = req.headers.get("host")
   
   // Check the viewport
   const viewport = device.type === 'mobile' ? 'mobile' : 'desktop'
@@ -37,6 +38,7 @@ export function middleware(req) {
   // req.nextUrl.searchParams.set('UserCity', userCity)
   // req.nextUrl.searchParams.set('UserRegion', userRegion)
   req.nextUrl.searchParams.set('UserIP', userIP)
+  req.nextUrl.searchParams.set('hostURL', hostURL)
   req.nextUrl.pathname = `_viewport/${viewport}${originalPathName}`
   
 

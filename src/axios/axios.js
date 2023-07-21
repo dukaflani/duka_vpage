@@ -19,7 +19,6 @@ export const getVideosPage = async ( pageParam = 1, options = {} ) => {
 
 
 export const getCurrentVideo = async ( videoDetails ) => {
-    console.log("axios video details query:", videoDetails)
     const slug = videoDetails?.queryKey[1]?.slug
     const video_username = videoDetails?.queryKey[1]?.username
     const response = await api.get(`/store/videos/?slug=${slug}&video_username=${video_username}`)
