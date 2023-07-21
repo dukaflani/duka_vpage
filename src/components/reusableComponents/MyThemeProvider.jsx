@@ -31,7 +31,8 @@ const MyThemeProvider = ({ children }) => {
    
    const darkTheme = useMemo(() => createTheme({
      palette: {
-       mode: is_darkMode === "dark" || prefersDarkMode === true ? "dark" : is_darkMode === "light" && prefersDarkMode === true ? "light" : "light"
+      //  mode: is_darkMode === "dark" || prefersDarkMode === true ? "dark" : is_darkMode === "light" && prefersDarkMode === true ? "light" : "light"
+      mode: "dark"
      }
    }), [is_darkMode, prefersDarkMode])
 
