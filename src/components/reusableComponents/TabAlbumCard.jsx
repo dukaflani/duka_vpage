@@ -72,6 +72,9 @@ export const TabAlbumTrackCard = ({ albumTrackHovered, i, albumTrack }) => {
     mutate(newView)
   }
 
+  console.log("albumtrack object:", albumTrack )
+  console.log("albumtrack slug:", albumTrack?.video_slug )
+  console.log("videoSlug param:", videoSlug )
 
   
 
