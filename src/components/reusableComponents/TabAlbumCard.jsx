@@ -68,30 +68,25 @@ export const TabAlbumTrackCard = ({ albumTrackHovered, i, albumTrack }) => {
     dispatch(pageHasChanged(true))
     dispatch(setRegularPageView())
     // router.push({pathname: '/watch', query: {v: albumTrack.youtube_id}})
-    router.push({pathname: `/${albumTrack?.slug}`})
+    router.push({pathname: `/${albumTrack?.video_slug}`})
     mutate(newView)
   }
 
-  console.log("albumtrack object:", albumTrack )
-  console.log("albumtrack slug:", albumTrack?.slug )
-  console.log("videoSlug param:", videoSlug )
-  
-  
-// color: albumTrack?.slug == videoSlug ? (<BarChartIcon onClick={handleVideoClick} sx={{color: "#42a5f5"}} />) : (<PlayCircleIcon onClick={handleVideoClick} sx={{color: colors.grey[100]}} />)
 
- //
+  
+
   return (
     <Card variant='outlined' square sx={{marginTop: 1}} elevation={albumTrackHovered == i ? 1 : albumTrackHovered == null ? 0 : 0}>
       <CardActionArea>
         <CardContent>
           <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-            <Stack sx={{width: '100%', color: albumTrack?.slug == videoSlug ? "#42a5f5" : "#fff"}}>
+            <Stack sx={{width: '100%', color: albumTrack?.video_slug == videoSlug ? "#42a5f5" : "#fff"}}>
               <Typography className="line-clamp-1 line-clamp" variant='subtitle2'>{albumTrack?.title}</Typography>
               <Divider/>
               <Typography className="line-clamp-1 line-clamp" variant='caption'>{albumTrack?.featuring ? `ft. ${albumTrack?.featuring}` : "Solo Project"}</Typography>
             </Stack>
             <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', paddingLeft: 1}} >
-              {albumTrack?.video && albumTrack?.video != 1 ? <Tooltip title='Play' placement="top" >{albumTrack?.slug == videoSlug ? (<BarChartIcon onClick={handleVideoClick} sx={{color: "#42a5f5"}} />) : (<PlayCircleIcon onClick={handleVideoClick} sx={{color: colors.grey[100]}} />)}</Tooltip> : <PlayCircleIcon sx={{color: colors.grey[900]}} />}
+              {albumTrack?.video && albumTrack?.video != 1 ? <Tooltip title='Play' placement="top" >{albumTrack?.video_slug == videoSlug ? (<BarChartIcon onClick={handleVideoClick} sx={{color: "#42a5f5"}} />) : (<PlayCircleIcon onClick={handleVideoClick} sx={{color: colors.grey[100]}} />)}</Tooltip> : <PlayCircleIcon sx={{color: colors.grey[900]}} />}
             </Box>
           </Box>
         </CardContent>
