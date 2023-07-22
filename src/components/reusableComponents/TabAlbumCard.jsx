@@ -86,7 +86,7 @@ export const TabAlbumTrackCard = ({ albumTrackHovered, i, albumTrack }) => {
               <Typography className="line-clamp-1 line-clamp" variant='caption'>{albumTrack?.featuring ? `ft. ${albumTrack?.featuring}` : "Solo Project"}</Typography>
             </Stack>
             <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', paddingLeft: 1}} >
-              {albumTrack?.video && albumTrack?.video != 1 ? <Tooltip title='Play' placement="top" >{albumTrack?.video_slug == videoSlug ? (<BarChartIcon onClick={handleVideoClick} sx={{color: "#42a5f5"}} />) : (<PlayCircleIcon onClick={handleVideoClick} sx={{color: colors.grey[100]}} />)}</Tooltip> : <PlayCircleIcon sx={{color: colors.grey[900]}} />}
+              {albumTrack?.video && albumTrack?.video != 1 ? <Box >{albumTrack?.video_slug == videoSlug ? (<Tooltip title='Playing' placement="top" ><BarChartIcon onClick={handleVideoClick} sx={{color: "#42a5f5"}} /></Tooltip>) : (<Tooltip title='Play' placement="top" ><PlayCircleIcon onClick={handleVideoClick} sx={{color: colors.grey[100]}} /></Tooltip>)}</Box> : <PlayCircleIcon sx={{color: colors.grey[900]}} />}
             </Box>
           </Box>
         </CardContent>
