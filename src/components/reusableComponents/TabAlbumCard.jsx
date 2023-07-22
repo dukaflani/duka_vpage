@@ -72,6 +72,10 @@ export const TabAlbumTrackCard = ({ albumTrackHovered, i, albumTrack }) => {
     mutate(newView)
   }
 
+  console.log("albumtrack object:", albumTrack )
+  console.log("albumtrack slug:", albumTrack?.slug )
+  console.log("videoSlug param:", videoSlug )
+  
   
 // color: albumTrack?.slug == videoSlug ? (<BarChartIcon onClick={handleVideoClick} sx={{color: "#42a5f5"}} />) : (<PlayCircleIcon onClick={handleVideoClick} sx={{color: colors.grey[100]}} />)
 
