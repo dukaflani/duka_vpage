@@ -294,21 +294,24 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode }) => {
                     </Box>
                     <Stack spacing={2}>
                         <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'start'}}>
-                            {data?.profile_avatar ? (<Box onClick={() => {
-                                        router.push({ pathname: `/${data?.username}` })
-                                        dispatch(pageHasChanged(true))
-                                        }} ><Avatar  src={data?.profile_avatar} alt={data?.stage_name} /></Box>) : (<Skeleton animation="wave" variant="circular" width={40} height={40} />)}
-                            <Box 
-                                onClick={() => {
-                                        router.push({ pathname: `/${data?.username}` })
-                                        dispatch(pageHasChanged(true))
-                                        }} 
-                                sx={{paddingX: 1, display: 'flex', alignItems: 'center', justifyContent: 'start'}}>
+                            {data?.profile_avatar ? (<Link
+                                href={`https://dukaflani.com/${data?.username}`} 
+                                color="inherit" 
+                                underline='none'
+                             >
+                                    <Avatar  src={data?.profile_avatar} alt={data?.stage_name} />
+                                </Link>) : (<Skeleton animation="wave" variant="circular" width={40} height={40} />)}
+                            <Link 
+                                href={`https://dukaflani.com/${data?.username}`} 
+                                color="inherit" 
+                                underline='none'
+                                sx={{paddingX: 1, display: 'flex', alignItems: 'center', justifyContent: 'start'}}
+                                >
                                 <Stack spacing={0.5} direction='row'>
                                     {data?.stage_name ? (<Box ><Typography className="line-clamp-1 line-clamp" variant='subtitle2'>{data?.stage_name}</Typography></Box>) : (<Skeleton width="100%" />)}
                                     {data?.verified && <CheckCircleIcon sx={{ fontSize: 13, color: colors.grey[100]}} />}
                                 </Stack>
-                            </Box>
+                            </Link>
                             <Box sx={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'start', paddingX: 1}}>
                                 <Typography variant='caption'>{isLoading ? '--' :  `${formatedFanBaseCount}`}</Typography>
                             </Box>
@@ -369,19 +372,23 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode }) => {
                                                     <Typography sx={{fontSize: 12, backgroundColor: 'yellow', color: colors.grey[800]}} className="line-clamp-1 line-clamp" variant='caption'>Ad</Typography>
                                                     <Typography sx={{fontSize: 12, color: 'GrayText'}} className="line-clamp-1 line-clamp" variant='caption'>Dukaflani Ads</Typography>
                                                 </Stack>
-                                                <Button startIcon={<InfoOutlinedIcon/>} onClick={() => {
-                                                    dispatch(pageHasChanged(true))
-                                                    router.push({ pathname: '/links/contact_us' })
-                                                    }} variant='text' size='small'>Learn More</Button>
+                                                <Link href='https://dukaflani.com/links/contact_us'>
+                                                    <Button 
+                                                        startIcon={<InfoOutlinedIcon/>} 
+                                                        variant='text' 
+                                                        size='small'
+                                                        >
+                                                        Learn More
+                                                    </Button>
+                                                </Link>
                                             </Stack>
                                         </Stack>
                                     </Grid>
                                     <Grid xs={1.5} item>
-                                        <Box onClick={() => {
-                                            dispatch(pageHasChanged(true))
-                                            router.push({ pathname: '/links/contact_us' })
-                                            }}>
-                                            <OpenInNewOutlinedIcon />
+                                        <Box>
+                                            <Link href='https://dukaflani.com/links/contact_us'>
+                                                <OpenInNewOutlinedIcon />
+                                            </Link>
                                         </Box>
                                     </Grid>
                                 </Grid>

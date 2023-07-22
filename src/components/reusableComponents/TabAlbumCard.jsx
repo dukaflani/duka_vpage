@@ -21,6 +21,7 @@ import OpenInNewOutlinedIcon from '@mui/icons-material/OpenInNewOutlined';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import KeyboardDoubleArrowDownOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowDownOutlined';
+import BarChartIcon from '@mui/icons-material/BarChart';
 
 // Project Imports
 import { addView } from '@/axios/axios';
@@ -38,6 +39,7 @@ export const TabAlbumTrackCard = ({ albumTrackHovered, i, albumTrack }) => {
   const [user_country, setUser_country] = useState(null)
   const [user_ip, setUser_ip] = useState(null)
   const router = useRouter()
+  const { videoSlug } = router.query
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -65,24 +67,27 @@ export const TabAlbumTrackCard = ({ albumTrackHovered, i, albumTrack }) => {
   const handleVideoClick = () => {
     dispatch(pageHasChanged(true))
     dispatch(setRegularPageView())
-    router.push({pathname: '/watch', query: {v: albumTrack.youtube_id}})
+    // router.push({pathname: '/watch', query: {v: albumTrack.youtube_id}})
+    router.push({pathname: `/${albumTrack?.slug}`})
     mutate(newView)
   }
 
+  
+// color: albumTrack?.slug == videoSlug ? (<BarChartIcon onClick={handleVideoClick} sx={{color: "#42a5f5"}} />) : (<PlayCircleIcon onClick={handleVideoClick} sx={{color: colors.grey[100]}} />)
 
- 
+ //
   return (
     <Card variant='outlined' square sx={{marginTop: 1}} elevation={albumTrackHovered == i ? 1 : albumTrackHovered == null ? 0 : 0}>
       <CardActionArea>
         <CardContent>
           <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-            <Stack sx={{width: '100%'}}>
+            <Stack sx={{width: '100%', color: albumTrack?.slug == videoSlug ? "#42a5f5" : "#fff"}}>
               <Typography className="line-clamp-1 line-clamp" variant='subtitle2'>{albumTrack?.title}</Typography>
               <Divider/>
               <Typography className="line-clamp-1 line-clamp" variant='caption'>{albumTrack?.featuring ? `ft. ${albumTrack?.featuring}` : "Solo Project"}</Typography>
             </Stack>
             <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', paddingLeft: 1}} >
-              {albumTrack?.video && albumTrack?.video != 1 ? <Tooltip title='Play' placement="top" ><PlayCircleIcon onClick={handleVideoClick} sx={{color: colors.grey[100]}} /></Tooltip> : <PlayCircleIcon sx={{color: colors.grey[900]}} />}
+              {albumTrack?.video && albumTrack?.video != 1 ? <Tooltip title='Play' placement="top" >{albumTrack?.slug == videoSlug ? (<BarChartIcon onClick={handleVideoClick} sx={{color: "#42a5f5"}} />) : (<PlayCircleIcon onClick={handleVideoClick} sx={{color: colors.grey[100]}} />)}</Tooltip> : <PlayCircleIcon sx={{color: colors.grey[900]}} />}
             </Box>
           </Box>
         </CardContent>

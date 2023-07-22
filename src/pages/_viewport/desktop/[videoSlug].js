@@ -359,19 +359,27 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue }) => {
                                             <Box sx={{ width: '100%'}}>
                                                 <Stack spacing={1} direction='row' sx={{display: 'flex', alignItems: 'center', width: '100%'}}>
                                                     <Box>
-                                                        {data?.profile_avatar ? (<Box onClick={() => {
-                                                                        router.push({ pathname: `/${data?.username}` })
-                                                                        dispatch(pageHasChanged(true))
-                                                                        }}><Avatar  src={data?.profile_avatar} alt={data?.stage_name} /></Box>) : (<Skeleton animation="wave" variant="circular" width={40} height={40} />)}
+                                                        {data?.profile_avatar ? (<Link 
+                                                            href={`https://dukaflani.com/${data?.username}`} 
+                                                            color="inherit" 
+                                                            underline='none'
+                                                            sx={{cursor: 'pointer'}}
+                                                            >
+                                                                <Avatar  src={data?.profile_avatar} alt={data?.stage_name} />
+                                                            </Link>) : (<Skeleton animation="wave" variant="circular" width={40} height={40} />)}
                                                     </Box>
                                                     <Box sx={{flexGrow: 1, display: 'flex', alignItems: 'start', justifyContent: 'start'}}>
                                                         <Stack spacing={-0.2}>
                                                             <Stack spacing={0.5} direction='row'>
                                                                 <Tooltip title={data?.stage_name}>
-                                                                    {data?.stage_name ? (<Box onClick={() => {
-                                                                        router.push({ pathname: `/${data?.username}` })
-                                                                        dispatch(pageHasChanged(true))
-                                                                        }} sx={{cursor: 'pointer'}}><Typography className="line-clamp-1 line-clamp" variant='subtitle2'>{data?.stage_name}</Typography></Box>) : (<Skeleton width="100%" />)}
+                                                                    {data?.stage_name ? (<Link 
+                                                                        href={`https://dukaflani.com/${data?.username}`} 
+                                                                        color="inherit" 
+                                                                        underline='none' 
+                                                                        sx={{cursor: 'pointer'}}
+                                                                        >
+                                                                            <Typography className="line-clamp-1 line-clamp" variant='subtitle2'>{data?.stage_name}</Typography>
+                                                                        </Link>) : (<Skeleton width="100%" />)}
                                                                 </Tooltip>
                                                                 {data?.verified && <Tooltip title='Verified'><CheckCircleIcon sx={{ fontSize: 15, color:  colors.grey[100], cursor: 'pointer' }} /></Tooltip>}                   
                                                             </Stack>
@@ -418,10 +426,16 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue }) => {
                                                                                 <Typography sx={{fontSize: 12, color: 'GrayText'}} className="line-clamp-1 line-clamp" variant='caption'>Dukaflani Ads</Typography>
                                                                             </Stack>
                                                                         </Box>
-                                                                        <Box sx={{width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}><Button onClick={() => {
-                                                                            dispatch(pageHasChanged(true))
-                                                                            router.push({ pathname: '/links/contact_us' })
-                                                                            }} startIcon={<InfoOutlinedIcon/>} fullWidth size="small" variant='contained'>Learn More</Button></Box>
+                                                                        <Box sx={{width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                                                                            <Link color="inherit" underline='none' href='https://dukaflani.com/links/contact_us'>
+                                                                                <Button  
+                                                                                startIcon={<InfoOutlinedIcon/>} 
+                                                                                fullWidth size="small" 
+                                                                                variant='contained'>
+                                                                                    Learn More
+                                                                                </Button>
+                                                                            </Link>
+                                                                        </Box>
                                                                     </Stack>
                                                                 </Box>
                                                             </Grid>
