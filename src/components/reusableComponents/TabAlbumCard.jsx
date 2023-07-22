@@ -65,16 +65,13 @@ export const TabAlbumTrackCard = ({ albumTrackHovered, i, albumTrack }) => {
    })
 
   const handleVideoClick = () => {
-    dispatch(pageHasChanged(true))
+    // dispatch(pageHasChanged(true))
     dispatch(setRegularPageView())
     // router.push({pathname: '/watch', query: {v: albumTrack.youtube_id}})
     router.push({pathname: `/${albumTrack?.video_slug}`})
     mutate(newView)
   }
 
-  console.log("albumtrack object:", albumTrack )
-  console.log("albumtrack slug:", albumTrack?.video_slug )
-  console.log("videoSlug param:", videoSlug )
 
   
 
