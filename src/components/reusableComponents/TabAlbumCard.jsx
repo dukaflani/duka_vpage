@@ -82,7 +82,7 @@ export const TabAlbumTrackCard = ({ albumTrackHovered, i, albumTrack }) => {
               <Typography className="line-clamp-1 line-clamp" variant='caption'>{albumTrack?.featuring ? `ft. ${albumTrack?.featuring}` : "Solo Project"}</Typography>
             </Stack>
             <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', paddingLeft: 1}} >
-              {albumTrack?.video && albumTrack?.video != 1 ? <Tooltip title='Play' placement="top" ><PlayCircleIcon onClick={handleVideoClick} sx={{color: is_darkMode === "dark" || prefersDarkMode === true ? colors.grey[100] : is_darkMode === "light" && prefersDarkMode === true ? colors.grey[800] : colors.grey[800]}} /></Tooltip> : <PlayCircleIcon sx={{color: is_darkMode === "dark" || prefersDarkMode === true ? colors.grey[900] : is_darkMode === "light" && prefersDarkMode === true ? colors.grey[100] : colors.grey[100]}} />}
+              {albumTrack?.video && albumTrack?.video != 1 ? <Tooltip title='Play' placement="top" ><PlayCircleIcon onClick={handleVideoClick} sx={{color: colors.grey[100]}} /></Tooltip> : <PlayCircleIcon sx={{color: colors.grey[900]}} />}
             </Box>
           </Box>
         </CardContent>
@@ -156,7 +156,7 @@ const TabAlbumCard = ({ album, data, albumTracks, loadingAlbum, loadingTracks })
                           <Stack>
                             <Stack spacing={0.5} direction='row'>
                                 <Typography variant='subtitle2'>{data?.stage_name}</Typography>
-                                {data?.verified && <CheckCircleIcon sx={{ fontSize: 15, color: is_darkMode === "dark" || prefersDarkMode === true ? colors.grey[100] : is_darkMode === "light" && prefersDarkMode === true ? colors.grey[800] : colors.grey[800] }} />}                   
+                                {data?.verified && <CheckCircleIcon sx={{ fontSize: 15, color: colors.grey[100]}} />}                   
                             </Stack>
                             <Typography variant='body2'>{album?.title}</Typography>
                             <Typography variant='body2'>{albumTracks?.length} {albumTracks?.length == 1 ? "Track" : "Tracks"}</Typography>

@@ -284,7 +284,7 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode }) => {
             <Container sx={{paddingTop: 3}} maxWidth='sm'>
                 <Stack spacing={1.5}>
                     <Box onClick={() => setShowSongDetails(true)}>
-                    {data?.title ? (<Typography gutterBottom sx={{lineHeight: 1, fontWeight: "bold", color: is_darkMode === "dark" || prefersDarkMode === true ? colors.grey[100] : is_darkMode === "light" && prefersDarkMode === true ? colors.grey[800] : colors.grey[800]}} variant='subtitle1' component='h1'>{data?.title}</Typography>) : (<Skeleton width="80%" />)}
+                    {data?.title ? (<Typography gutterBottom sx={{lineHeight: 1, fontWeight: "bold", color: colors.grey[100]}} variant='subtitle1' component='h1'>{data?.title}</Typography>) : (<Skeleton width="80%" />)}
                     <Stack sx={{display: 'flex', alignItems: 'center', justifyContent: 'start'}} direction='row' spacing={1}>
                             {data?.genre_title ? (<Typography sx={{color: '#1976d2'}} variant='button'>{data?.genre_title}</Typography>) : (<Skeleton width="10%" />)}
                             {data?.views_count ? (<Typography variant='caption'>{formatedViewCount} {data?.views_count == 1 ? 'view' : 'views'}</Typography>) : (<Skeleton width="10%" />)}
@@ -306,7 +306,7 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode }) => {
                                 sx={{paddingX: 1, display: 'flex', alignItems: 'center', justifyContent: 'start'}}>
                                 <Stack spacing={0.5} direction='row'>
                                     {data?.stage_name ? (<Box ><Typography className="line-clamp-1 line-clamp" variant='subtitle2'>{data?.stage_name}</Typography></Box>) : (<Skeleton width="100%" />)}
-                                    {data?.verified && <CheckCircleIcon sx={{ fontSize: 13, color: is_darkMode === "dark" || prefersDarkMode === true ? colors.grey[100] : is_darkMode === "light" && prefersDarkMode === true ? colors.grey[800] : colors.grey[800] }} />}
+                                    {data?.verified && <CheckCircleIcon sx={{ fontSize: 13, color: colors.grey[100]}} />}
                                 </Stack>
                             </Box>
                             <Box sx={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'start', paddingX: 1}}>

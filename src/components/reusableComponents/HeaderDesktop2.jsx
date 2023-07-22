@@ -370,7 +370,7 @@ useEffect(() => {
         {pageNavigated && <AppBarLinearProgress  darkMode={is_darkMode}  prefersDarkMode={prefersDarkMode}   />}
           <Toolbar variant="dense">
             <IconButton onClick={() => setDrawerOpen(true)} edge="start" color="inherit" aria-label="menu" sx={{ mr: 1 }}>
-                <MenuOutlined style={{ fontSize: 16, color: is_darkMode === "dark" || prefersDarkMode === true ? colors.grey[100] : is_darkMode === "light" && prefersDarkMode === true ? colors.grey[800] : colors.grey[800] }} />
+                <MenuOutlined style={{ fontSize: 16, color: colors.grey[100]}} />
             </IconButton>
             <Link 
               onClick={(e) => {
@@ -421,7 +421,7 @@ useEffect(() => {
                   />
               </Search2>
               ) : is_darkMode === "light" && prefersDarkMode === true ? (
-                <Search >
+                <Search2 >
                   <SearchIconWrapper>
                     <SearchOutlined style={{ color: colors.grey[800] }} />
                   </SearchIconWrapper>
@@ -433,9 +433,9 @@ useEffect(() => {
                     onChange={(e) => setMySearchTerm(e.target.value)}
                     onKeyDown={updateSearchTerm}
                   />
-                </Search>
+                </Search2>
               ) : (
-                <Search >
+                <Search2 >
                   <SearchIconWrapper>
                     <SearchOutlined style={{ color: colors.grey[800] }} />
                   </SearchIconWrapper>
@@ -447,7 +447,7 @@ useEffect(() => {
                     onChange={(e) => setMySearchTerm(e.target.value)}
                     onKeyDown={updateSearchTerm}
                   />
-                </Search>
+                </Search2>
               ) }
             </Box>
             <Stack direction="row" spacing={1}>
@@ -565,7 +565,7 @@ useEffect(() => {
           <div style={{minWidth: 250, minHeight: '100%', display: 'flex', flexDirection: 'column'}}>
               <Toolbar variant="dense" sx={{width: '100%'}}>
                 <IconButton onClick={() => setDrawerOpen(false)} edge="start" color="inherit" aria-label="menu" sx={{ mr: 1 }}>
-                  <MenuOutlined style={{ fontSize: 16, color: is_darkMode === "dark" || prefersDarkMode === true ? colors.grey[100] : is_darkMode === "light" && prefersDarkMode === true ? colors.grey[800] : colors.grey[800] }} />
+                  <MenuOutlined style={{ fontSize: 16, color: colors.grey[100]}} />
                 </IconButton>
                 <Link 
                   onClick={(e) => {

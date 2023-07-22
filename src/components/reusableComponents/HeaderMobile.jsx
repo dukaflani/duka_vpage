@@ -270,7 +270,7 @@ useEffect(() => {
         <Toolbar variant="dense">
           {showSearch ? <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'start', width: '100%'}} >
             <IconButton onClick={() => setShowSearch(false)} edge="start" color="inherit" aria-label="menu" sx={{ mr: 1 }}>
-                <ArrowLeftOutlined  style={{ fontSize: 16, color: is_darkMode === "dark" || prefersDarkMode === true ? colors.grey[100] : is_darkMode === "light" && prefersDarkMode === true ? colors.grey[800] : colors.grey[800]  }} />
+                <ArrowLeftOutlined  style={{ fontSize: 16, color:  colors.grey[100]}} />
             </IconButton>
             <Box sx={{flex: 1,}}>
               <InputBase 
@@ -286,14 +286,14 @@ useEffect(() => {
                   />
             </Box>
             <IconButton onClick={updateSearchTermClick} edge="start" color="inherit" aria-label="menu" sx={{ ml: 1 }}>
-                <SearchOutlined  style={{ fontSize: 16, color: is_darkMode === "dark" || prefersDarkMode === true ? colors.grey[100] : is_darkMode === "light" && prefersDarkMode === true ? colors.grey[800] : colors.grey[800]  }} />
+                <SearchOutlined  style={{ fontSize: 16, color: colors.grey[100]}} />
             </IconButton>
 
           </Box>
           :
           <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'start', width: '100%'}} >
             <IconButton onClick={() => setDrawerOpen(true)} edge="start" color="inherit" aria-label="menu" sx={{ mr: 1 }}>
-                <MenuOutlined style={{ fontSize: 16, color: is_darkMode === "dark" || prefersDarkMode === true ? colors.grey[100] : is_darkMode === "light" && prefersDarkMode === true ? colors.grey[800] : colors.grey[800]  }} />
+                <MenuOutlined style={{ fontSize: 16, color: colors.grey[100]}} />
             </IconButton>
             <Link 
                 onClick={(e) => {
@@ -313,13 +313,13 @@ useEffect(() => {
             <Box sx={{padding: 1, flexGrow: 1}}></Box>
             <Stack direction='row' spacing={0.5} sx={{display: 'flex', alignItems: 'center', justifyContent: 'end' }}>
                 <IconButton onClick={() => setShowSearch(true)} edge="start" color="inherit" aria-label="search">
-                  <SearchOutlined  style={{ fontSize: 16, color: is_darkMode === "dark" || prefersDarkMode === true ? colors.grey[100] : is_darkMode === "light" && prefersDarkMode === true ? colors.grey[800] : colors.grey[800]  }} />
+                  <SearchOutlined  style={{ fontSize: 16, color: colors.grey[100]}} />
                 </IconButton>
                 <IconButton edge="start" color="inherit" aria-label="notifications">
-                  <BellOutlined style={{ fontSize: 16, color: is_darkMode === "dark" || prefersDarkMode === true ? colors.grey[100] : is_darkMode === "light" && prefersDarkMode === true ? colors.grey[800] : colors.grey[800]  }} />
+                  <BellOutlined style={{ fontSize: 16, color: colors.grey[100]}} />
               </IconButton>
                 <IconButton edge="start" color="inherit" aria-label="shopping cart">
-                  <ShoppingCartOutlined style={{ fontSize: 16, color: is_darkMode === "dark" || prefersDarkMode === true ? colors.grey[100] : is_darkMode === "light" && prefersDarkMode === true ? colors.grey[800] : colors.grey[800]  }} />
+                  <ShoppingCartOutlined style={{ fontSize: 16, color: colors.grey[100] }} />
               </IconButton>
               <Avatar sx={{ width: 24, height: 24 }} src={userProfile?.profile_avatar} alt={`${userProfile?.first_name} ${userProfile?.last_name}`}/>
               <IconButton
@@ -333,7 +333,7 @@ useEffect(() => {
                    aria-expanded={openNavMenu ? 'true' : undefined}
                    onClick={handleClickNavMenu} 
                    >
-                  <MoreVertIcon fontSize="small" sx={{ color: is_darkMode === "dark" || prefersDarkMode === true ? colors.grey[100] : is_darkMode === "light" && prefersDarkMode === true ? colors.grey[800] : colors.grey[800]  }} />
+                  <MoreVertIcon fontSize="small" sx={{ color: colors.grey[100]}} />
                 </IconButton>
                 {/* Video Options Menu */}
                 <Menu
@@ -428,7 +428,7 @@ useEffect(() => {
           <div style={{minWidth: 250, minHeight: '100%', display: 'flex', flexDirection: 'column'}}>
               <Toolbar variant="dense" sx={{width: '100%'}}>
                 <IconButton onClick={() => setDrawerOpen(false)} edge="start" color="inherit" aria-label="menu" sx={{ mr: 1 }}>
-                  <MenuOutlined style={{ fontSize: 16, color: is_darkMode === "dark" || prefersDarkMode === true ? colors.grey[100] : is_darkMode === "light" && prefersDarkMode === true ? colors.grey[800] : colors.grey[800]  }} />
+                  <MenuOutlined style={{ fontSize: 16, color: colors.grey[100]}} />
                 </IconButton>
                 <Link 
                   onClick={(e) => {

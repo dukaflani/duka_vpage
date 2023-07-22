@@ -373,7 +373,7 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue }) => {
                                                                         dispatch(pageHasChanged(true))
                                                                         }} sx={{cursor: 'pointer'}}><Typography className="line-clamp-1 line-clamp" variant='subtitle2'>{data?.stage_name}</Typography></Box>) : (<Skeleton width="100%" />)}
                                                                 </Tooltip>
-                                                                {data?.verified && <Tooltip title='Verified'><CheckCircleIcon sx={{ fontSize: 15, color: is_darkMode === "dark" || prefersDarkMode === true ? colors.grey[100] : is_darkMode === "light" && prefersDarkMode === true ? colors.grey[800] : colors.grey[800], cursor: 'pointer' }} /></Tooltip>}                   
+                                                                {data?.verified && <Tooltip title='Verified'><CheckCircleIcon sx={{ fontSize: 15, color:  colors.grey[100], cursor: 'pointer' }} /></Tooltip>}                   
                                                             </Stack>
                                                             <Typography variant='caption'>{isLoading ? 'Fanbase --' :  `Fanbase ${formatedFanBaseCount}`}</Typography>
                                                         </Stack>
