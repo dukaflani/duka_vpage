@@ -83,11 +83,6 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue }) => {
 
     const userSubDomainRaw = hostURL?.split(".")[0]
     const userSubdomain = userSubDomainRaw == "www" ? hostURL?.split(".")[1] : userSubDomainRaw
-    console.log("video slug:", videoSlug)
-    console.log("user country:", UserCountry)
-    console.log("user IP:", UserIP)
-    console.log("host url:", hostURL)
-    console.log("user subdomain:", userSubdomain)
     
     useEffect(() => {
         if (linkCopied) {
