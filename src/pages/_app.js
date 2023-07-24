@@ -1,3 +1,6 @@
+// Google Tag Manager Module
+import TagManager from 'react-gtm-module'
+
 // Global CSS Styles
 import '@/styles/globalStyles.css'
 
@@ -33,6 +36,14 @@ import MyThemeProvider from '@/components/reusableComponents/MyThemeProvider';
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }) {
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || " ";
+  const tagManagerArgs = {
+    gtmId,
+  };
+
+  useEffect(() => {
+    TagManager.initialize(tagManagerArgs);
+  }, [])
 
   const [value, setValue] = useState(0)
   const [isDarkMode, setIsDarkMode] = useState(false)
