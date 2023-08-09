@@ -7,7 +7,7 @@ import Image from "next/legacy/image";
 import { useRouter } from 'next/router';
 
 // TanStack/React-Query
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { QueryClient, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 // NPM Imports
 import { useDispatch, useSelector } from 'react-redux';
@@ -56,6 +56,32 @@ import TabAlbumCard from '@/components/reusableComponents/TabAlbumCard';
 import TabEventsCards from '@/components/reusableComponents/TabEventsCards';
 import TabMediaTourCard from '@/components/reusableComponents/TabMediaTourCard';
 import Copyright from '@/components/reusableComponents/Copyright';
+
+
+
+export const getServerSideProps = async (cxt) => {
+    const { query } = cxt
+
+    const queryClient = new QueryClient()
+
+    const userSubDomainRaw = query?.hostURL?.split(".")[0]
+    const userSubdomain = userSubDomainRaw == "www" ? query?.hostURL?.split(".")[1] : userSubDomainRaw
+
+    const videoDetails = {
+        slug: query?.videoSlug, 
+        username: userSubdomain
+      }
+
+    await queryClient.prefetchQuery(["current-video", videoDetails], (videoDetails) => getCurrentVideo(videoDetails))
+
+
+    return {
+        props: {
+            dehydratedState: dehydrate(queryClient),
+        }
+    }
+
+}
 
 
 

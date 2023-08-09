@@ -11,7 +11,7 @@ import { Avatar, Box, Card, colors, Container, Divider, Grid, Button, Stack, Typ
     CardContent, CardActionArea, Tooltip, Tabs, Tab, Paper, Link, Skeleton, useMediaQuery } from '@mui/material'
 
 // TanStack/React-Query
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { QueryClient, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 // NPM Imports
 import { useDispatch, useSelector } from 'react-redux';
@@ -55,6 +55,33 @@ import { getCurrentVideo, getCurrentVideoUserProfile, getCurrentVideoStreamingLi
 import { pageHasChanged, removeRefferalURL } from '@/redux/features/navigation/navigationSlice';
 
 
+export const getServerSideProps = async (cxt) => {
+    const { query } = cxt
+
+    const queryClient = new QueryClient()
+
+    const userSubDomainRaw = query?.hostURL?.split(".")[0]
+    const userSubdomain = userSubDomainRaw == "www" ? query?.hostURL?.split(".")[1] : userSubDomainRaw
+
+    const videoDetails = {
+        slug: query?.videoSlug, 
+        username: userSubdomain
+      }
+
+    await queryClient.prefetchQuery(["current-video", videoDetails], (videoDetails) => getCurrentVideo(videoDetails))
+
+
+    return {
+        props: {
+            dehydratedState: dehydrate(queryClient),
+        }
+    }
+
+}
+
+
+
+
 
 const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue }) => {
     // const currentLoggedInUser = useSelector((state) => state.auth.userInfo)
@@ -83,6 +110,7 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue }) => {
 
     const userSubDomainRaw = hostURL?.split(".")[0]
     const userSubdomain = userSubDomainRaw == "www" ? hostURL?.split(".")[1] : userSubDomainRaw
+
     
     useEffect(() => {
         if (linkCopied) {
