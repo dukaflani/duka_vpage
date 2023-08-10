@@ -56,7 +56,7 @@ import { pageHasChanged, removeRefferalURL } from '@/redux/features/navigation/n
 
 
 
-const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue, videoDetails2 }) => {
+const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue, ssrVideoDetails, ssrUserSubdomain, ssrVideoSlug }) => {
     // const currentLoggedInUser = useSelector((state) => state.auth.userInfo)
     // const userCountry = useSelector((state) => state.auth.country)
     // const userIpAddress = useSelector((state) => state.auth.ip_address) 
@@ -83,8 +83,6 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue, videoDetails
 
     const userSubDomainRaw = hostURL?.split(".")[0]
     const userSubdomain = userSubDomainRaw == "www" ? hostURL?.split(".")[1] : userSubDomainRaw
-
-    console.log("ssr video details:", videoDetails2)
 
     
     useEffect(() => {
@@ -229,31 +227,31 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue, videoDetails
     <Paper>
         <NavigationLayout2 setIsDarkMode={setIsDarkMode} isDarkMode={isDarkMode} >
             <Head>
-                <title>{loading_current_video ? "Loading video..." : `${data?.title} - Dukaflani`}</title>
-                <meta name="title" content={`${data?.title} - Dukaflani`} />
+                <title>{`${ssrVideoDetails?.title} - Dukaflani`}</title>
+                <meta name="title" content={`${ssrVideoDetails?.title} - Dukaflani`} />
                 <meta name="description" content="A dynamic link-in-bio solution built for the modern African Artist with support for streaming links, merchandise, lyrics, skiza tunes, albums, events and media tours"/>
                 <meta name="keywords" content="Music Videos, Dukaflani, Links, Events, Merchandise, Skiza Tune, Lyrics, Albums, Celebrity Merchandise, Name Brands"/>
 
                 
                 <meta property="og:type" content="website"/>
-                <meta property="og:url" content={`https://${userSubdomain}.duka.to/${videoSlug}`} />
-                <meta property="og:title" content={`${data?.title} - Dukaflani`} />
+                <meta property="og:url" content={`https://${ssrUserSubdomain}.duka.to/${ssrVideoSlug}`} />
+                <meta property="og:title" content={`${ssrVideoDetails?.title} - Dukaflani`} />
                 <meta property="og:description" content="A dynamic link-in-bio solution built for the modern African Artist with support for streaming links, merchandise, lyrics, skiza tunes, albums, events and media tours"/>
                 <meta 
                     property="og:image" 
-                    // content={`${process.env.NEXT_PUBLIC_NEXT_URL}/api/og?stage_name=${data?.stage_name}&fanbase_count=${videoProfile?.fanbase_count}&song_title=${data?.song_title}&video_title=${data?.title}&avatar=${data?.profile_avatar}`} />
-                    content={data?.thumbnail} 
+                    // content={`${process.env.NEXT_PUBLIC_NEXT_URL}/api/og?stage_name=${ssrVideoDetails?.stage_name}&fanbase_count=${videoProfile?.fanbase_count}&song_title=${ssrVideoDetails?.song_title}&video_title=${ssrVideoDetails?.title}&avatar=${ssrVideoDetails?.profile_avatar}`} />
+                    content={ssrVideoDetails?.thumbnail} 
                     />
 
                 
                 <meta property="twitter:card" content="summary_large_image"/>
-                <meta property="twitter:url" content={`https://${userSubdomain}.duka.to/${videoSlug}`} />
-                <meta property="twitter:title" content={`${data?.title} - Dukaflani`} />
+                <meta property="twitter:url" content={`https://${ssrUserSubdomain}.duka.to/${ssrVideoSlug}`} />
+                <meta property="twitter:title" content={`${ssrVideoDetails?.title} - Dukaflani`} />
                 <meta property="twitter:description" content="A dynamic link-in-bio solution built for the modern African Artist with support for streaming links, merchandise, lyrics, skiza tunes, albums, events and media tours"/>
                 <meta 
                     property="twitter:image" 
-                    // content={`${process.env.NEXT_PUBLIC_NEXT_URL}/api/og?stage_name=${data?.stage_name}&fanbase_count=${videoProfile?.fanbase_count}&song_title=${data?.song_title}&video_title=${data?.title}&avatar=${data?.profile_avatar}`} />
-                    content={data?.thumbnail} 
+                    // content={`${process.env.NEXT_PUBLIC_NEXT_URL}/api/og?stage_name=${ssrVideoDetails?.stage_name}&fanbase_count=${videoProfile?.fanbase_count}&song_title=${ssrVideoDetails?.song_title}&video_title=${ssrVideoDetails?.title}&avatar=${ssrVideoDetails?.profile_avatar}`} />
+                    content={ssrVideoDetails?.thumbnail} 
                     />
         </Head>
             <Box sx={{ minHeight: '100vh', paddingTop: 5}}>
@@ -262,14 +260,14 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue, videoDetails
                         <Grid container sx={{padding: 5}} spacing={3}>
                             <Grid xs={12} md={8} item>
                                 <Stack>
-                                    {data?.youtube_embed_link ? (<Box sx={{position: 'relative', paddingBottom: '56.25%'}}>
+                                    {ssrVideoDetails?.youtube_embed_link ? (<Box sx={{position: 'relative', paddingBottom: '56.25%'}}>
                                         {/* <CircularProgress sx={{ position: 'absolute' }} color="inherit" /> */}
-                                        <iframe width='100%' height='100%' src={data?.youtube_embed_link} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                                        <iframe width='100%' height='100%' src={ssrVideoDetails?.youtube_embed_link} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                                     </Box>) : (<Skeleton animation="wave"  variant="rectangular" sx={{ paddingTop: '56.25%', width: '100%'}} />)}
                                     <Stack>
                                         <Box>
-                                            {data?.genre_title ? (<Typography sx={{color: '#1976d2'}} variant='button'>{data?.genre_title}</Typography>) : (<Skeleton width="10%" />)}
-                                            {data?.title ? (<Typography variant='h6' component='h1'>{data?.title}</Typography>) : (<Skeleton width="70%" />)}
+                                            {ssrVideoDetails?.genre_title ? (<Typography sx={{color: '#1976d2'}} variant='button'>{ssrVideoDetails?.genre_title}</Typography>) : (<Skeleton width="10%" />)}
+                                            {ssrVideoDetails?.title ? (<Typography variant='h6' component='h1'>{ssrVideoDetails?.title}</Typography>) : (<Skeleton width="70%" />)}
                                         </Box>
                                     </Stack>
                                     <Stack>
@@ -530,10 +528,12 @@ export const getServerSideProps = async (cxt) => {
     const videoData = await videosApiCallResponse.json();
 
 
-
+    
     return {
         props: {
-            videoDetails2: videoData?.results[0],
+            ssrVideoDetails: videoData?.results[0],
+            ssrUserSubdomain: userSubdomain,
+            ssrVideoSlug: query?.videoSlug
         }
     }
 
