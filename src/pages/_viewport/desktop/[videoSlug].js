@@ -518,17 +518,22 @@ export const getServerSideProps = async (cxt) => {
     const userSubDomainRaw = hostRaw?.split(".")[0]
     const userSubdomain = userSubDomainRaw == "www" ? hostRaw?.split(".")[1] : userSubDomainRaw
 
+    // `/store/videos/?slug=${query?.videoSlug}&video_username=${userSubdomain}`
 
-    const videoDetails = {
-        slug: query?.videoSlug, 
-        username: userSubdomain
-      }
+    const videosApiCallResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/store/videos/?slug=${query?.videoSlug}&video_username=${userSubdomain}`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+        }
+        });
+
+    const videoData = await videosApiCallResponse.json();
 
 
 
     return {
         props: {
-            videoDetails2: videoDetails,
+            videoDetails2: videoData,
         }
     }
 
