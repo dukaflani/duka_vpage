@@ -533,7 +533,7 @@ export const getServerSideProps = async (cxt) => {
 
     return {
         props: {
-            videoDetails2: videoData,
+            videoDetails2: videoData?.results[0],
         }
     }
 
