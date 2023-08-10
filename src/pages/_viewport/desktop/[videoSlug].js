@@ -227,16 +227,16 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue, ssrVideoDeta
     <Paper>
         <NavigationLayout2 setIsDarkMode={setIsDarkMode} isDarkMode={isDarkMode} >
             <Head>
-                <title>{`${ssrVideoDetails?.title} - Dukaflani`}</title>
-                <meta name="title" content={`${ssrVideoDetails?.title} - Dukaflani`} />
-                <meta name="description" content="A dynamic link-in-bio solution built for the modern African Artist with support for streaming links, merchandise, lyrics, skiza tunes, albums, events and media tours"/>
+                <title>{`${ssrVideoDetails?.song_title} by ${ssrVideoDetails?.stage_name} - Dukaflani | Hub For All Things Music`}</title>
+                <meta name="title" content={`${ssrVideoDetails?.song_title} by ${ssrVideoDetails?.stage_name} - Dukaflani | Hub For All Things Music`} />
+                <meta name="description" content="Buy the merchandise, download & stream it, get the lyrics, skiza tunes, album, events and media tours"/>
                 <meta name="keywords" content="Music Videos, Dukaflani, Links, Events, Merchandise, Skiza Tune, Lyrics, Albums, Celebrity Merchandise, Name Brands"/>
 
                 
                 <meta property="og:type" content="website"/>
                 <meta property="og:url" content={`https://${ssrUserSubdomain}.duka.to/${ssrVideoSlug}`} />
-                <meta property="og:title" content={`${ssrVideoDetails?.title} - Dukaflani`} />
-                <meta property="og:description" content="A dynamic link-in-bio solution built for the modern African Artist with support for streaming links, merchandise, lyrics, skiza tunes, albums, events and media tours"/>
+                <meta property="og:title" content={`${ssrVideoDetails?.song_title} by ${ssrVideoDetails?.stage_name} - Dukaflani | Hub For All Things Music`} />
+                <meta property="og:description" content="Buy the merchandise, download & stream it, get the lyrics, skiza tunes, album, events and media tours"/>
                 <meta 
                     property="og:image" 
                     // content={`${process.env.NEXT_PUBLIC_NEXT_URL}/api/og?stage_name=${ssrVideoDetails?.stage_name}&fanbase_count=${videoProfile?.fanbase_count}&song_title=${ssrVideoDetails?.song_title}&video_title=${ssrVideoDetails?.title}&avatar=${ssrVideoDetails?.profile_avatar}`} />
@@ -246,8 +246,8 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue, ssrVideoDeta
                 
                 <meta property="twitter:card" content="summary_large_image"/>
                 <meta property="twitter:url" content={`https://${ssrUserSubdomain}.duka.to/${ssrVideoSlug}`} />
-                <meta property="twitter:title" content={`${ssrVideoDetails?.title} - Dukaflani`} />
-                <meta property="twitter:description" content="A dynamic link-in-bio solution built for the modern African Artist with support for streaming links, merchandise, lyrics, skiza tunes, albums, events and media tours"/>
+                <meta property="twitter:title" content={`${ssrVideoDetails?.song_title} by ${ssrVideoDetails?.stage_name} - Dukaflani | Hub For All Things Music`} />
+                <meta property="twitter:description" content="Buy the merchandise, download & stream it, get the lyrics, skiza tunes, album, events and media tours"/>
                 <meta 
                     property="twitter:image" 
                     // content={`${process.env.NEXT_PUBLIC_NEXT_URL}/api/og?stage_name=${ssrVideoDetails?.stage_name}&fanbase_count=${videoProfile?.fanbase_count}&song_title=${ssrVideoDetails?.song_title}&video_title=${ssrVideoDetails?.title}&avatar=${ssrVideoDetails?.profile_avatar}`} />
