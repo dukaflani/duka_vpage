@@ -253,7 +253,7 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue, ssrVideoDeta
                     // content={`${process.env.NEXT_PUBLIC_NEXT_URL}/api/og?stage_name=${ssrVideoDetails?.stage_name}&fanbase_count=${videoProfile?.fanbase_count}&song_title=${ssrVideoDetails?.song_title}&video_title=${ssrVideoDetails?.title}&avatar=${ssrVideoDetails?.profile_avatar}`} />
                     content={ssrVideoDetails?.thumbnail} 
                     />
-        </Head>
+            </Head>
             <Box sx={{ minHeight: '100vh', paddingTop: 5}}>
                 <Container maxWidth='lg'>
                     <Box>

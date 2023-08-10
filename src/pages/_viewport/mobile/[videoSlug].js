@@ -59,7 +59,7 @@ import Copyright from '@/components/reusableComponents/Copyright';
 
 
 
-const CurrentVideo = ({ setIsDarkMode, isDarkMode }) => {
+const CurrentVideo = ({ setIsDarkMode, isDarkMode, ssrVideoDetails, ssrUserSubdomain, ssrVideoSlug }) => {
     const is_darkMode = useSelector((state) => state.theme.isDarkMode)
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
     const referralURL = useSelector((state) => state.navigation.referralURL)
@@ -244,18 +244,40 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode }) => {
   return (
     <>
     <MobileNavigationLayout setIsDarkMode={setIsDarkMode} isDarkMode={isDarkMode} >
-        <Head>
-            <title>{loading_current_video ? "Loading video..." : `${data?.title} - Dukaflani`}</title>
-            <meta name="title" content={`${data?.title} - Dukaflani`} />
-            <meta name="description" content="A dynamic link-in-bio solution built for the modern African Artist with support for streaming links, merchandise, lyrics, skiza tunes, albums, events and media tours"/>
-            <meta name="keywords" content="Music Videos, Dukaflani, Links, Events, Merchandise, Skiza Tune, Lyrics, Albums, Celebrity Merchandise, Name Brands"/>
-        </Head>
+            <Head>
+                <title>{`${ssrVideoDetails?.title} - Dukaflani`}</title>
+                <meta name="title" content={`${ssrVideoDetails?.title} - Dukaflani`} />
+                <meta name="description" content="A dynamic link-in-bio solution built for the modern African Artist with support for streaming links, merchandise, lyrics, skiza tunes, albums, events and media tours"/>
+                <meta name="keywords" content="Music Videos, Dukaflani, Links, Events, Merchandise, Skiza Tune, Lyrics, Albums, Celebrity Merchandise, Name Brands"/>
+
+                
+                <meta property="og:type" content="website"/>
+                <meta property="og:url" content={`https://${ssrUserSubdomain}.duka.to/${ssrVideoSlug}`} />
+                <meta property="og:title" content={`${ssrVideoDetails?.title} - Dukaflani`} />
+                <meta property="og:description" content="A dynamic link-in-bio solution built for the modern African Artist with support for streaming links, merchandise, lyrics, skiza tunes, albums, events and media tours"/>
+                <meta 
+                    property="og:image" 
+                    // content={`${process.env.NEXT_PUBLIC_NEXT_URL}/api/og?stage_name=${ssrVideoDetails?.stage_name}&fanbase_count=${videoProfile?.fanbase_count}&song_title=${ssrVideoDetails?.song_title}&video_title=${ssrVideoDetails?.title}&avatar=${ssrVideoDetails?.profile_avatar}`} />
+                    content={ssrVideoDetails?.thumbnail} 
+                    />
+
+                
+                <meta property="twitter:card" content="summary_large_image"/>
+                <meta property="twitter:url" content={`https://${ssrUserSubdomain}.duka.to/${ssrVideoSlug}`} />
+                <meta property="twitter:title" content={`${ssrVideoDetails?.title} - Dukaflani`} />
+                <meta property="twitter:description" content="A dynamic link-in-bio solution built for the modern African Artist with support for streaming links, merchandise, lyrics, skiza tunes, albums, events and media tours"/>
+                <meta 
+                    property="twitter:image" 
+                    // content={`${process.env.NEXT_PUBLIC_NEXT_URL}/api/og?stage_name=${ssrVideoDetails?.stage_name}&fanbase_count=${videoProfile?.fanbase_count}&song_title=${ssrVideoDetails?.song_title}&video_title=${ssrVideoDetails?.title}&avatar=${ssrVideoDetails?.profile_avatar}`} />
+                    content={ssrVideoDetails?.thumbnail} 
+                    />
+            </Head>
         <Paper sx={{ minHeight: '100vh', paddingTop: 5, paddingBottom: 10}}>
             <Box sx={{position: 'sticky', top: 48, zIndex: 99}} >
                 <Box sx={{backgroundColor: 'black', width: '100%'}}>
                     <Container disableGutters maxWidth='sm'>
-                        {data?.youtube_embed_link ? (<Box sx={{position: 'relative', paddingBottom: '56.25%'}}>
-                            <iframe width='100%' height='100%' src={data?.youtube_embed_link} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                        {ssrVideoDetails?.youtube_embed_link ? (<Box sx={{position: 'relative', paddingBottom: '56.25%'}}>
+                            <iframe width='100%' height='100%' src={ssrVideoDetails?.youtube_embed_link} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                         </Box>) : (<Skeleton animation="wave"  variant="rectangular" sx={{ paddingTop: '56.25%', width: '100%'}} />)}
                     </Container>
                 </Box>
@@ -282,9 +304,9 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode }) => {
             <Container sx={{paddingTop: 3}} maxWidth='sm'>
                 <Stack spacing={1.5}>
                     <Box onClick={() => setShowSongDetails(true)}>
-                    {data?.title ? (<Typography gutterBottom sx={{lineHeight: 1, fontWeight: "bold", color: colors.grey[100]}} variant='subtitle1' component='h1'>{data?.title}</Typography>) : (<Skeleton width="80%" />)}
+                    {ssrVideoDetails?.title ? (<Typography gutterBottom sx={{lineHeight: 1, fontWeight: "bold", color: colors.grey[100]}} variant='subtitle1' component='h1'>{ssrVideoDetails?.title}</Typography>) : (<Skeleton width="80%" />)}
                     <Stack sx={{display: 'flex', alignItems: 'center', justifyContent: 'start'}} direction='row' spacing={1}>
-                            {data?.genre_title ? (<Typography sx={{color: '#1976d2'}} variant='button'>{data?.genre_title}</Typography>) : (<Skeleton width="10%" />)}
+                            {ssrVideoDetails?.genre_title ? (<Typography sx={{color: '#1976d2'}} variant='button'>{ssrVideoDetails?.genre_title}</Typography>) : (<Skeleton width="10%" />)}
                             {data?.views_count ? (<Typography variant='caption'>{formatedViewCount} {data?.views_count == 1 ? 'view' : 'views'}</Typography>) : (<Skeleton width="10%" />)}
                             {data?.date ? (<Typography variant='caption'>{videoUploadTime}</Typography>) : (<Skeleton width="15%" />)}
                             <Typography variant='subtitle2'>more...</Typography>
@@ -525,28 +547,33 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode }) => {
 export default CurrentVideo
 
 
-// export const getServerSideProps = async (cxt) => {
-//     const { query } = cxt
-
-//     const queryClient = new QueryClient()
-
-//     const hostRaw = cxt.req.headers.host
-//     const userSubDomainRaw = hostRaw?.split(".")[0]
-//     const userSubdomain = userSubDomainRaw == "www" ? hostRaw?.split(".")[1] : userSubDomainRaw
+export const getServerSideProps = async (cxt) => {
+    const { query } = cxt
 
 
-//     const videoDetails = {
-//         slug: query?.videoSlug, 
-//         username: userSubdomain
-//       }
+    const hostRaw = cxt.req.headers.host
+    const userSubDomainRaw = hostRaw?.split(".")[0]
+    const userSubdomain = userSubDomainRaw == "www" ? hostRaw?.split(".")[1] : userSubDomainRaw
 
-//     await queryClient.prefetchQuery(["current-video", videoDetails], (videoDetails) => getCurrentVideo(videoDetails))
+    // `/store/videos/?slug=${query?.videoSlug}&video_username=${userSubdomain}`
+
+    const videosApiCallResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/store/videos/?slug=${query?.videoSlug}&video_username=${userSubdomain}`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+        }
+        });
+
+    const videoData = await videosApiCallResponse.json();
 
 
-//     return {
-//         props: {
-//             dehydratedState: dehydrate(queryClient),
-//         }
-//     }
+    
+    return {
+        props: {
+            ssrVideoDetails: videoData?.results[0],
+            ssrUserSubdomain: userSubdomain,
+            ssrVideoSlug: query?.videoSlug
+        }
+    }
 
-// }
+}
