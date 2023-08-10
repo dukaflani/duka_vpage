@@ -56,7 +56,7 @@ import { pageHasChanged, removeRefferalURL } from '@/redux/features/navigation/n
 
 
 
-const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue }) => {
+const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue, videoDetails }) => {
     // const currentLoggedInUser = useSelector((state) => state.auth.userInfo)
     // const userCountry = useSelector((state) => state.auth.country)
     // const userIpAddress = useSelector((state) => state.auth.ip_address) 
@@ -83,6 +83,8 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue }) => {
 
     const userSubDomainRaw = hostURL?.split(".")[0]
     const userSubdomain = userSubDomainRaw == "www" ? hostURL?.split(".")[1] : userSubDomainRaw
+
+    console.log("ssr video details:", videoDetails)
 
     
     useEffect(() => {
@@ -511,7 +513,6 @@ export default CurrentVideo
 export const getServerSideProps = async (cxt) => {
     const { query } = cxt
 
-    const queryClient = new QueryClient()
 
     const hostRaw = cxt.req.headers.host
     const userSubDomainRaw = hostRaw?.split(".")[0]
@@ -523,12 +524,11 @@ export const getServerSideProps = async (cxt) => {
         username: userSubdomain
       }
 
-    await queryClient.prefetchQuery(["current-video", videoDetails], (videoDetails) => getCurrentVideo(videoDetails))
 
 
     return {
         props: {
-            dehydratedState: dehydrate(queryClient),
+            videoDetails,
         }
     }
 

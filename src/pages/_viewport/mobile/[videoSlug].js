@@ -525,28 +525,28 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode }) => {
 export default CurrentVideo
 
 
-export const getServerSideProps = async (cxt) => {
-    const { query } = cxt
+// export const getServerSideProps = async (cxt) => {
+//     const { query } = cxt
 
-    const queryClient = new QueryClient()
+//     const queryClient = new QueryClient()
 
-    const hostRaw = cxt.req.headers.host
-    const userSubDomainRaw = hostRaw?.split(".")[0]
-    const userSubdomain = userSubDomainRaw == "www" ? hostRaw?.split(".")[1] : userSubDomainRaw
-
-
-    const videoDetails = {
-        slug: query?.videoSlug, 
-        username: userSubdomain
-      }
-
-    await queryClient.prefetchQuery(["current-video", videoDetails], (videoDetails) => getCurrentVideo(videoDetails))
+//     const hostRaw = cxt.req.headers.host
+//     const userSubDomainRaw = hostRaw?.split(".")[0]
+//     const userSubdomain = userSubDomainRaw == "www" ? hostRaw?.split(".")[1] : userSubDomainRaw
 
 
-    return {
-        props: {
-            dehydratedState: dehydrate(queryClient),
-        }
-    }
+//     const videoDetails = {
+//         slug: query?.videoSlug, 
+//         username: userSubdomain
+//       }
 
-}
+//     await queryClient.prefetchQuery(["current-video", videoDetails], (videoDetails) => getCurrentVideo(videoDetails))
+
+
+//     return {
+//         props: {
+//             dehydratedState: dehydrate(queryClient),
+//         }
+//     }
+
+// }
