@@ -59,34 +59,6 @@ import Copyright from '@/components/reusableComponents/Copyright';
 
 
 
-export const getServerSideProps = async (cxt) => {
-    const { query } = cxt
-
-    const queryClient = new QueryClient()
-
-    const userSubDomainRaw = query?.hostURL?.split(".")[0]
-    const userSubdomain = userSubDomainRaw == "www" ? query?.hostURL?.split(".")[1] : userSubDomainRaw
-
-    const videoDetails = {
-        slug: query?.videoSlug, 
-        username: userSubdomain
-      }
-
-    await queryClient.prefetchQuery(["current-video", videoDetails], (videoDetails) => getCurrentVideo(videoDetails))
-
-
-    return {
-        props: {
-            dehydratedState: dehydrate(queryClient),
-        }
-    }
-
-}
-
-
-
-
-
 const CurrentVideo = ({ setIsDarkMode, isDarkMode }) => {
     const is_darkMode = useSelector((state) => state.theme.isDarkMode)
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
@@ -551,3 +523,30 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode }) => {
 }
 
 export default CurrentVideo
+
+
+export const getServerSideProps = async (cxt) => {
+    const { query } = cxt
+
+    const queryClient = new QueryClient()
+
+    const hostRaw = cxt.req.headers.host
+    const userSubDomainRaw = hostRaw?.split(".")[0]
+    const userSubdomain = userSubDomainRaw == "www" ? hostRaw?.split(".")[1] : userSubDomainRaw
+
+
+    const videoDetails = {
+        slug: query?.videoSlug, 
+        username: userSubdomain
+      }
+
+    await queryClient.prefetchQuery(["current-video", videoDetails], (videoDetails) => getCurrentVideo(videoDetails))
+
+
+    return {
+        props: {
+            dehydratedState: dehydrate(queryClient),
+        }
+    }
+
+}

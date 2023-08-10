@@ -56,13 +56,13 @@ export default function App({ Component, pageProps }) {
         <>
           <CssBaseline />
           <QueryClientProvider client={queryClient}>
-            <Hydrate state={pageProps.dehydratedState}>
               <Provider store={store}>
-                <MyThemeProvider>
-                  <Component {...pageProps} setIsDarkMode={setIsDarkMode} isDarkMode={isDarkMode} value={value} setValue={setValue} />
-                </MyThemeProvider>
+                <Hydrate state={pageProps.dehydratedState}>
+                  <MyThemeProvider>
+                    <Component {...pageProps} setIsDarkMode={setIsDarkMode} isDarkMode={isDarkMode} value={value} setValue={setValue} />
+                  </MyThemeProvider>
+                </Hydrate>
               </Provider>
-            </Hydrate>
             <ReactQueryDevtools initialIsOpen={false} />
           </QueryClientProvider>
         </>

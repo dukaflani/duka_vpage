@@ -55,33 +55,6 @@ import { getCurrentVideo, getCurrentVideoUserProfile, getCurrentVideoStreamingLi
 import { pageHasChanged, removeRefferalURL } from '@/redux/features/navigation/navigationSlice';
 
 
-export const getServerSideProps = async (cxt) => {
-    const { query } = cxt
-
-    const queryClient = new QueryClient()
-
-    const userSubDomainRaw = query?.hostURL?.split(".")[0]
-    const userSubdomain = userSubDomainRaw == "www" ? query?.hostURL?.split(".")[1] : userSubDomainRaw
-
-    const videoDetails = {
-        slug: query?.videoSlug, 
-        username: userSubdomain
-      }
-
-    await queryClient.prefetchQuery(["current-video", videoDetails], (videoDetails) => getCurrentVideo(videoDetails))
-
-
-    return {
-        props: {
-            dehydratedState: dehydrate(queryClient),
-        }
-    }
-
-}
-
-
-
-
 
 const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue }) => {
     // const currentLoggedInUser = useSelector((state) => state.auth.userInfo)
@@ -533,3 +506,30 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue }) => {
 }
 
 export default CurrentVideo
+
+
+export const getServerSideProps = async (cxt) => {
+    const { query } = cxt
+
+    const queryClient = new QueryClient()
+
+    const hostRaw = cxt.req.headers.host
+    const userSubDomainRaw = hostRaw?.split(".")[0]
+    const userSubdomain = userSubDomainRaw == "www" ? hostRaw?.split(".")[1] : userSubDomainRaw
+
+
+    const videoDetails = {
+        slug: query?.videoSlug, 
+        username: userSubdomain
+      }
+
+    await queryClient.prefetchQuery(["current-video", videoDetails], (videoDetails) => getCurrentVideo(videoDetails))
+
+
+    return {
+        props: {
+            dehydratedState: dehydrate(queryClient),
+        }
+    }
+
+}
