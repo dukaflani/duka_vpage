@@ -30,7 +30,6 @@ import PhonelinkRingOutlinedIcon from '@mui/icons-material/PhonelinkRingOutlined
 import LibraryMusicOutlinedIcon from '@mui/icons-material/LibraryMusicOutlined';
 import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import CastConnectedOutlinedIcon from '@mui/icons-material/CastConnectedOutlined';
 import { RadioOutlined } from '@mui/icons-material';
