@@ -29,7 +29,7 @@ import MicNoneOutlinedIcon from '@mui/icons-material/MicNoneOutlined';
 import PhonelinkRingOutlinedIcon from '@mui/icons-material/PhonelinkRingOutlined';
 import LibraryMusicOutlinedIcon from '@mui/icons-material/LibraryMusicOutlined';
 import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import CastConnectedOutlinedIcon from '@mui/icons-material/CastConnectedOutlined';
@@ -388,12 +388,20 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue, ssrVideoDeta
                                                         </Stack>
                                                     </Box>
                                                     <Box>
-                                                        {
-                                                        true ?
-                                                            <Button disabled startIcon={<FavoriteBorderOutlinedIcon/>} variant='contained' size='small'>Join</Button>
-                                                            :
-                                                            <Button disabled startIcon={<FavoriteIcon/>} variant='outlined' size='small'>Leave</Button>
-                                                    }
+                                                        <Link  underline='none' href='https://dukaflani.com/account/login'>
+                                                            <Button  
+                                                                sx={{
+                                                                    background: "linear-gradient(45deg, #2900be 30%, #b723d5 90%)",
+                                                                    borderRadius: "5px",
+                                                                    border: 0,
+                                                                    color: "white",
+                                                                    transition: "box-shadow 0.3s ease-in-out",
+                                                                }} 
+                                                                startIcon={<FavoriteIcon/>} 
+                                                                variant='contained' 
+                                                                size='small'
+                                                                >Join</Button>
+                                                        </Link>
                                                     </Box>        
                                                 </Stack>
                                             </Box>
@@ -516,7 +524,6 @@ export const getServerSideProps = async (cxt) => {
     const userSubDomainRaw = hostRaw?.split(".")[0]
     const userSubdomain = userSubDomainRaw == "www" ? hostRaw?.split(".")[1] : userSubDomainRaw
 
-    // `/store/videos/?slug=${query?.videoSlug}&video_username=${userSubdomain}`
 
     const videosApiCallResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/store/videos/?slug=${query?.videoSlug}&video_username=${userSubdomain}`, {
         method: 'GET',

@@ -28,7 +28,7 @@ import LibraryMusicOutlinedIcon from '@mui/icons-material/LibraryMusicOutlined';
 import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
 import OpenInNewOutlinedIcon from '@mui/icons-material/OpenInNewOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import OndemandVideoOutlinedIcon from '@mui/icons-material/OndemandVideoOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
@@ -335,9 +335,20 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode, ssrVideoDetails, ssrUserSubdo
                             <Box sx={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'start', paddingX: 1}}>
                                 <Typography variant='caption'>{isLoading ? '--' :  `${formatedFanBaseCount}`}</Typography>
                             </Box>
-                            <IconButton disabled>
-                                <FavoriteBorderOutlinedIcon fontSize='small' />
-                            </IconButton>
+                                <Link  underline='none' href='https://dukaflani.com/account/login'>
+                                    <Button  
+                                        sx={{
+                                            background: "linear-gradient(45deg, #2900be 30%, #b723d5 90%)",
+                                            borderRadius: "5px",
+                                            border: 0,
+                                            color: "white",
+                                            transition: "box-shadow 0.3s ease-in-out",
+                                        }} 
+                                        startIcon={<FavoriteIcon/>} 
+                                        variant='contained' 
+                                        size='small'
+                                        >Join</Button>
+                            </Link>
                         </Box>
                         <Box>
                             {formatedLikesCount && <Stack direction='row' spacing={2}>
@@ -555,7 +566,6 @@ export const getServerSideProps = async (cxt) => {
     const userSubDomainRaw = hostRaw?.split(".")[0]
     const userSubdomain = userSubDomainRaw == "www" ? hostRaw?.split(".")[1] : userSubDomainRaw
 
-    // `/store/videos/?slug=${query?.videoSlug}&video_username=${userSubdomain}`
 
     const videosApiCallResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/store/videos/?slug=${query?.videoSlug}&video_username=${userSubdomain}`, {
         method: 'GET',
