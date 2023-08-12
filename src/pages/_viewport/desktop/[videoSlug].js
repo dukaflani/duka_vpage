@@ -286,16 +286,22 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue, ssrVideoDeta
                                         </Box>
                                         {formatedLikesCount && <Stack direction='row' spacing={2}>
                                             <Paper variant='outlined'  sx={{ display: 'flex', alignItems: 'center', justifyContent: 'end', paddingY: 1, paddingX: 1.5, borderRadius: 10, }}>
-                                                <Stack spacing={2} direction='row'>
-                                                    <Tooltip placement="top" title='I like'>
-                                                        <Stack direction='row' spacing={1} sx={{cursor: 'pointer'}}>
-                                                            <ThumbUpOutlinedIcon sx={{fontSize: 19}} />
-                                                            {formatedLikesCount && <Typography sx={{ fontWeight:'bold' }} variant='body2'>{formatedLikesCount}</Typography>}
-                                                        </Stack>
-                                                    </Tooltip>
-                                                    <Divider orientation="vertical" variant="middle" flexItem />
-                                                    <Tooltip placement="top" title="I don't like"><ThumbDownOutlinedIcon sx={{fontSize: 19, cursor: 'pointer'}} /></Tooltip>
-                                                </Stack>
+                                                <Link  
+                                                    href={`https://dukaflani.com/account/login`} 
+                                                    color="inherit" 
+                                                    underline='none'
+                                                    >
+                                                    <Stack spacing={2} direction='row'>
+                                                        <Tooltip placement="top" title='I like'>
+                                                            <Stack direction='row' spacing={1} sx={{cursor: 'pointer'}}>
+                                                                <ThumbUpOutlinedIcon sx={{fontSize: 19}} />
+                                                                {formatedLikesCount && <Typography sx={{ fontWeight:'bold' }} variant='body2'>{formatedLikesCount}</Typography>}
+                                                            </Stack>
+                                                        </Tooltip>
+                                                        <Divider orientation="vertical" variant="middle" flexItem />
+                                                        <Tooltip placement="top" title="I don't like"><ThumbDownOutlinedIcon sx={{fontSize: 19, cursor: 'pointer'}} /></Tooltip>
+                                                    </Stack>
+                                                </Link>
                                             </Paper>
                                             <Paper variant='outlined' sx={{ display: 'flex', alignItems: 'center', justifyContent: 'end', paddingY: 1, paddingX: 1.5, borderRadius: 10, cursor: 'pointer'}}>
                                                 <Stack spacing={2} direction='row'>
