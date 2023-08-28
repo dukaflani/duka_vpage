@@ -285,7 +285,7 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue, ssrVideoDeta
                                             </Grid>
                                         </Box>
                                         {formatedLikesCount && <Stack direction='row' spacing={2}>
-                                            <Paper variant='outlined'  sx={{ display: 'flex', alignItems: 'center', justifyContent: 'end', paddingY: 1, paddingX: 1.5, borderRadius: 10, }}>
+                                            {/* <Paper variant='outlined'  sx={{ display: 'flex', alignItems: 'center', justifyContent: 'end', paddingY: 1, paddingX: 1.5, borderRadius: 10, }}>
                                                 <Link  
                                                     href={`https://dukaflani.com/account/login`} 
                                                     color="inherit" 
@@ -302,7 +302,7 @@ const CurrentVideo = ({ setIsDarkMode, isDarkMode, value, setValue, ssrVideoDeta
                                                         <Tooltip placement="top" title="I don't like"><ThumbDownOutlinedIcon sx={{fontSize: 19, cursor: 'pointer'}} /></Tooltip>
                                                     </Stack>
                                                 </Link>
-                                            </Paper>
+                                            </Paper> */}
                                             <Paper variant='outlined' sx={{ display: 'flex', alignItems: 'center', justifyContent: 'end', paddingY: 1, paddingX: 1.5, borderRadius: 10, cursor: 'pointer'}}>
                                                 <Stack spacing={2} direction='row'>
                                                 <CopyToClipboard 
